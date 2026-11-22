@@ -1,0 +1,23 @@
+# Virtual environment & Python cache
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Data korpus & progres crawl (berisi artikel berhak cipta atau progres lokal)
+data/corpus.jsonl
+data/pool_to_label.csv
+data/visited_urls.txt
+data/known_urls.txt
+
+# Indeks turunan
+indexes/
+
+# Dokumen kerja agen (tidak di-commit sesuai AGENTS.md aturan 4)
+AGENTS.md
+docs/SPEC.md
+docs/PLAN.md
