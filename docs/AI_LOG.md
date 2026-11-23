@@ -52,3 +52,13 @@ Dokumen ini mencatat setiap tugas yang dikerjakan dengan bantuan agen AI, berkas
 - **Bagian yang perlu diperiksa manusia:**
   - Periksa hasil praproses teks di sel Langkah 4 notebook.
   - Tinjau diff git dan lakukan commit untuk T3.
+
+---
+
+### [2026-11-24] - Tugas T4: BM25 dan Indeks
+- **Tugas:** Mengimplementasikan fungsi pemuatan korpus `load_corpus()`, kelas retriever leksikal `BM25Retriever`, dan pembangun indeks `build_or_load_bm25_index()` pada Langkah 4 `ihsg_search.ipynb` sesuai SPEC 4.3.
+- **Berkas yang dibuat / diubah:**
+  - `ihsg_search.ipynb`: Menambahkan sel BM25 di Langkah 4 yang mengimplementasikan antarmuka seragam `search(query, k) -> list[(docid, skor)]`, penyimpanan `{"ids", "tokens"}` via pickle ke `indexes/bm25_tokens.pkl`, logika idempoten pembangunan/pemuatan indeks, serta membersihkan seluruh output sel notebook sesuai aturan AGENTS.md.
+- **Bagian yang perlu diperiksa manusia:**
+  - Periksa implementasi BM25 di sel Langkah 4 notebook.
+  - Tinjau diff git dan lakukan commit untuk T4.
