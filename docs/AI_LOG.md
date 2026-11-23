@@ -26,3 +26,19 @@ Dokumen ini mencatat setiap tugas yang dikerjakan dengan bantuan agen AI, berkas
   - Periksa nilai konfigurasi di sel Langkah 2 notebook.
   - Sebelum menjalankan crawler pada tugas T2, isi `CONTACT_EMAIL` dengan email Anda.
   - Tinjau diff git dan lakukan commit untuk T1.
+
+---
+
+### [2026-11-23] - Tugas T2: Crawler
+- **Tugas:** Mengimplementasikan fungsi ekstraksi artikel `extract_article()`, penyaringan aturan situs `is_allowed_url()`, dan fungsi crawler `run_crawler()` pada Langkah 3 `ihsg_search.ipynb` sesuai SPEC 4.1.
+- **Berkas yang dibuat / diubah:**
+  - `tests/fixtures/artikel_contoh.html`: Fixture pengujian HTML lokal yang merepresentasikan struktur DOM artikel CNBC (dua `div.detail-text` bersarang, tabel 'Baca:', 'Gambas', iklan, JSON-LD `datePublished`, dan dateline).
+  - `ihsg_search.ipynb`: Menambahkan sel kode Langkah 3 berisi `extract_article()` dan `run_crawler()`. Sel menolak eksekusi jika `CONTACT_EMAIL` kosong, mendukung penemuan URL BFS berprioritas IHSG, mode reproduksi dari `corpus_urls.txt`, jeda santun `CRAWL_DELAY = 2.0s`, penanganan HTTP 429, serta penyimpanan berkas riwayat URL dan korpus secara idempoten.
+- **Bagian yang perlu diperiksa manusia:**
+  - Anda dapat mengganti isi `tests/fixtures/artikel_contoh.html` dengan berkas HTML artikel CNBC asli (Ctrl+S dari browser) bila diinginkan untuk verifikasi tambahan.
+  - Untuk menjalankan pengumpulan data korpus awal:
+    1. Buka sel konfigurasi di Langkah 2, isi `CONTACT_EMAIL` dengan alamat email Anda.
+    2. Ubah sementara `TARGET_DOCS = 20` (sesuai aturan AGENTS.md).
+    3. Jalankan sel Langkah 3 dan periksa hasil di `data/corpus.jsonl`.
+    4. Kembalikan `TARGET_DOCS = 2000` sebelum melanjutkan.
+  - Tinjau diff git dan lakukan commit untuk T2.
