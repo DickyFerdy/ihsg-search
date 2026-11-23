@@ -42,3 +42,13 @@ Dokumen ini mencatat setiap tugas yang dikerjakan dengan bantuan agen AI, berkas
     3. Jalankan sel Langkah 3 dan periksa hasil di `data/corpus.jsonl`.
     4. Kembalikan `TARGET_DOCS = 2000` sebelum melanjutkan.
   - Tinjau diff git dan lakukan commit untuk T2.
+
+---
+
+### [2026-11-23] - Tugas T3: Praproses
+- **Tugas:** Mengimplementasikan fungsi `preprocess()` pada bagian awal Langkah 4 `ihsg_search.ipynb` sesuai protokol SPEC 4.2.
+- **Berkas yang dibuat / diubah:**
+  - `ihsg_search.ipynb`: Menambahkan sel kode praproses teks di Langkah 4 yang mencakup huruf kecil, penghapusan URL, tokenisasi regex `[a-z][a-z0-9]*`, kamus normalisasi variasi (`idx->bei`, `dollar/usd->dolar`, `rp->rupiah`), pembersihan token 1 huruf dan stopword (Sastrawi + cnbc, com, www, http, https), serta stemming Sastrawi dengan `lru_cache` (kecuali 10 istilah domain terproteksi: `{ihsg, bei, ojk, bi, msci, ipo, lq45, emiten, asing, ssi}`).
+- **Bagian yang perlu diperiksa manusia:**
+  - Periksa hasil praproses teks di sel Langkah 4 notebook.
+  - Tinjau diff git dan lakukan commit untuk T3.
