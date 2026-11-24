@@ -62,3 +62,35 @@ Dokumen ini mencatat setiap tugas yang dikerjakan dengan bantuan agen AI, berkas
 - **Bagian yang perlu diperiksa manusia:**
   - Periksa implementasi BM25 di sel Langkah 4 notebook.
   - Tinjau diff git dan lakukan commit untuk T4.
+
+---
+
+### [2026-11-24] - Tugas T5: Dense dan FAISS
+- **Tugas:** Mengimplementasikan kelas `DenseRetriever` dan pembangun indeks `build_or_load_dense_index()` pada Langkah 4 `ihsg_search.ipynb` sesuai SPEC 4.3.
+- **Berkas yang dibuat / diubah:**
+  - `ihsg_search.ipynb`: Menambahkan sel kode Dense di Langkah 4 yang menggunakan model `intfloat/multilingual-e5-small`, menerapkan konvensi awalan `passage: ` untuk dokumen dan `query: ` untuk kueri, embedding ternormalisasi L2, indeks FAISS `IndexFlatIP` (Cosine Similarity) yang disimpan ke `indexes/faiss.index`, pemetaan ID ke `indexes/dense_ids.json` tanpa duplikasi vektor embedding, serta mekanisme idempoten (melewati encode ulang jika indeks sudah cocok dengan korpus).
+- **Bagian yang perlu diperiksa manusia:**
+  - Periksa implementasi Dense retriever di sel Langkah 4 notebook.
+  - Sesuai PLAN.md, model `intfloat/multilingual-e5-small` membutuhkan unduhan bobot model saat pertama kali dijalankan di kernel oleh manusia.
+  - Tinjau diff git dan lakukan commit untuk T5.
+
+---
+
+### [2026-11-24] - Tugas T6: Hybrid RRF dan Pemuatan Sistem
+- **Tugas:** Mengimplementasikan algoritma Reciprocal Rank Fusion `reciprocal_rank_fusion()`, kelas retriever gabungan `HybridRetriever`, fungsi pengukuran memori RSS `get_process_memory_mb()`, serta sel pemuatan ketiga sistem (BM25, Dense, Hybrid) pada Langkah 5 `ihsg_search.ipynb` sesuai SPEC 4.3 dan 4.7.
+- **Berkas yang dibuat / diubah:**
+  - `ihsg_search.ipynb`: Menambahkan sel kode Langkah 5 yang mengintegrasikan BM25 dan Dense menggunakan RRF ($k=60$, 100 kandidat per retriever), antarmuka `search(query, k)`, serta estimasi memori proses menggunakan `psutil` secara lintas platform.
+- **Bagian yang perlu diperiksa manusia:**
+  - Periksa implementasi RRF dan pemuatan sistem di Langkah 5 notebook.
+  - Tinjau diff git dan lakukan commit untuk T6.
+
+---
+
+### [2026-11-24] - Tugas T8: Pooling (Langkah 6)
+- **Tugas:** Mengimplementasikan fungsi `generate_pool()` pada Langkah 6 `ihsg_search.ipynb` sesuai protokol SPEC 4.4.
+- **Berkas yang dibuat / diubah:**
+  - `ihsg_search.ipynb`: Menambahkan sel kode Langkah 6 yang mengambil top-10 kandidat dokumen dari BM25, Dense, dan Hybrid, menggabungkannya secara unik (union) per kueri, mengacak urutannya dengan seed acak agar penilai netral dari bias sistem, dan mengekspornya ke `data/pool_to_label.csv` dengan kolom `rel` yang dibiarkan kosong untuk penilaian manual manusia (mematuhi Aturan 1 AGENTS.md), serta mekanisme proteksi agar tidak menimpa pool atau qrels yang sudah ada.
+- **Bagian yang perlu diperiksa manusia:**
+  - Siapkan berkas `data/queries.csv` (berisi 25 kueri uji dengan header `qid,query`).
+  - Setelah `queries.csv` tersedia, jalankan sel Langkah 6 di notebook untuk menghasilkan `data/pool_to_label.csv`.
+  - Tinjau diff git dan lakukan commit untuk T8.
