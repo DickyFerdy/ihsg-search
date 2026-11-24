@@ -105,3 +105,17 @@ Dokumen ini mencatat setiap tugas yang dikerjakan dengan bantuan agen AI, berkas
   - Kolom `rel` pada `data/pool_to_label.csv` wajib diisi manual oleh manusia (skala: `0` = tidak relevan, `1` = relevan sebagian, `2` = sangat relevan) sesuai kriteria SPEC 4.5. Agen sama sekali tidak mengisi kolom ini demi menjaga integritas ilmiah (Aturan 1 AGENTS.md).
   - Setelah penilaian relevansi selesai diisi, jalankan sel Langkah 7 di notebook untuk menghasilkan `data/qrels.csv`.
   - Tinjau diff git dan lakukan commit untuk T9.
+
+---
+
+### [2026-11-25] - Penyesuaian Spesifikasi Antarmuka: Adopsi Streamlit
+- **Tugas:** Menyesuaikan seluruh dokumentasi spesifikasi (`docs/SPEC.md`, `docs/PLAN.md`, `AGENTS.md`, `requirements.txt`, dan Langkah 11 `ihsg_search.ipynb`) untuk menggunakan antarmuka web interaktif berbasis **Streamlit** (`app.py`) menggantikan `ipywidgets` sesuai permintaan pengguna.
+- **Berkas yang dibuat / diubah:**
+  - `docs/SPEC.md`: Memperbarui tabel keputusan desain, struktur berkas (menambahkan `app.py`), spesifikasi UI bagian 4.9 menjadi web app Streamlit, dan daftar langkah notebook Langkah 11.
+  - `docs/PLAN.md`: Menyesuaikan tugas T7 pada tabel dan rincian kerja untuk mencakup pembuatan antarmuka web Streamlit `app.py`.
+  - `AGENTS.md`: Menambahkan pengecualian resmi pada bagian hasil akhir untuk menyertakan modul web `app.py`.
+  - `requirements.txt`: Menambahkan pustaka `streamlit>=1.28.0`.
+  - `ihsg_search.ipynb`: Memperbarui sel judul Langkah 11 menjadi antarmuka web Streamlit.
+- **Bagian yang perlu diperiksa manusia:**
+  - Periksa perubahan pada `docs/SPEC.md` dan `requirements.txt`.
+  - Lakukan commit git untuk perubahan dependensi dan dokumentasi ini.
