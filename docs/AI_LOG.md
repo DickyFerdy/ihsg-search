@@ -94,3 +94,14 @@ Dokumen ini mencatat setiap tugas yang dikerjakan dengan bantuan agen AI, berkas
   - Siapkan berkas `data/queries.csv` (berisi 25 kueri uji dengan header `qid,query`).
   - Setelah `queries.csv` tersedia, jalankan sel Langkah 6 di notebook untuk menghasilkan `data/pool_to_label.csv`.
   - Tinjau diff git dan lakukan commit untuk T8.
+
+---
+
+### [2026-11-25] - Tugas T9: Pelabelan Manual & Pembaca Qrels (Langkah 7)
+- **Tugas:** Mengimplementasikan fungsi pembaca CSV andal `read_csv_robust()` dan pemuat ground truth `load_qrels()` pada Langkah 7 `ihsg_search.ipynb` sesuai SPEC 4.5.
+- **Berkas yang dibuat / diubah:**
+  - `ihsg_search.ipynb`: Menambahkan sel kode Langkah 7 yang menangani anomali ekspor ulang berkas CSV dari Microsoft Excel (seperti baris terbungkus tanda kutip ganda atau delimiter titik koma), memuat relevance judgements dari `data/pool_to_label.csv`, otomatis menyinkronkan ke `data/qrels.csv` saat label tersedia, dan memberikan peringatan informatif bila penilaian manusia belum selesai tanpa melempar error tak terduga.
+- **Bagian yang perlu diperiksa manusia:**
+  - Kolom `rel` pada `data/pool_to_label.csv` wajib diisi manual oleh manusia (skala: `0` = tidak relevan, `1` = relevan sebagian, `2` = sangat relevan) sesuai kriteria SPEC 4.5. Agen sama sekali tidak mengisi kolom ini demi menjaga integritas ilmiah (Aturan 1 AGENTS.md).
+  - Setelah penilaian relevansi selesai diisi, jalankan sel Langkah 7 di notebook untuk menghasilkan `data/qrels.csv`.
+  - Tinjau diff git dan lakukan commit untuk T9.
