@@ -119,3 +119,20 @@ Dokumen ini mencatat setiap tugas yang dikerjakan dengan bantuan agen AI, berkas
 - **Bagian yang perlu diperiksa manusia:**
   - Periksa perubahan pada `docs/SPEC.md` dan `requirements.txt`.
   - Lakukan commit git untuk perubahan dependensi dan dokumentasi ini.
+
+
+---
+
+### [2026-11-25] - Modularisasi Notebook ke Paket Python Terstruktur
+- **Tugas:** Memecah sel-sel kode panjang pada `ihsg_search.ipynb` (Langkah 1 sampai Langkah 7, termasuk pembaruan UI `ipywidgets` pada sel Langkah 1 dan sel Langkah 3 yang sebelumnya belum tercatat) menjadi modul-modul Python terkelompok sesuai fungsinya, dan menjadikan `ihsg_search.ipynb` sebagai notebook orchestrator tipis.
+- **Berkas yang dibuat / diubah:**
+  - `config.py`: Konstanta terpusat, seed (`SEED=42`), parameter crawler, BM25, Dense, RRF, serta path direktori dan berkas.
+  - `setup/__init__.py` & `setup/install.py`: Antarmuka instalasi dependensi `requirements.txt` berbasis `ipywidgets` (`show_install_ui()`) dengan progress bar dan pemantauan status pip.
+  - `crawler/__init__.py`, `crawler/extractor.py`, `crawler/crawler.py`, & `crawler/ui.py`: Memisahkan validasi URL & ekstraksi artikel (`is_allowed_url()`, `extract_article()`), logika inti crawler (`run_crawler()`), serta launcher UI interaktif (`show_crawler_launcher()`, `_build_crawler_monitor()`).
+  - `preprocess/__init__.py` & `preprocess/text.py`: Pipeline praproses teks bahasa Indonesia (`preprocess()`, `cached_stem()`, `STOPWORDS`, `NORMALIZATION_MAP`, `PROTECTED_TERMS`).
+  - `retrieval/__init__.py`, `retrieval/bm25.py`, `retrieval/dense.py`, & `retrieval/hybrid.py`: Pemuatan korpus (`load_corpus()`), retriever BM25 (`BM25Retriever`, `build_or_load_bm25_index()`), retriever Dense FAISS (`DenseRetriever`, `build_or_load_dense_index()`), serta Hybrid RRF (`reciprocal_rank_fusion()`, `HybridRetriever`, `get_process_memory_mb()`, `cari()`, `load_system()`).
+  - `evaluation/__init__.py`, `evaluation/pooling.py`, & `evaluation/qrels.py`: Pembuatan pool (`generate_pool()`) dan pembaca CSV/qrels andal (`read_csv_robust()`, `load_qrels()`).
+  - `ihsg_search.ipynb`: Diringkas menjadi notebook orchestrator di mana setiap sel kode hanya mengimpor dan memanggil fungsi dari modul terkait.
+- **Bagian yang perlu diperiksa manusia:**
+  - Jalankan sel Langkah 2 sampai Langkah 7 secara berurutan di kernel notebook untuk memastikan seluruh impor modul dan alur eksekusi berjalan sesuai harapan.
+  - Periksa `git status` dan lakukan commit untuk struktur modular baru ini.
